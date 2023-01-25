@@ -319,6 +319,9 @@ class FSMLocation(models.Model):
             action["context"] = self.env.context.copy()
             action["context"].update({"group_by": ""})
             action["context"].update({"default_location_id": self.id})
+            action["context"].update({"default_current_location_id": self.id})
+            action["context"].update({"default_owned_by_id": self.owner_id.id})
+            action["context"].update({"default_managed_by_id": self.owner_id.id})
             if len(equipment) == 0 or len(equipment) > 1:
                 action["domain"] = [("id", "in", equipment.ids)]
             elif equipment:

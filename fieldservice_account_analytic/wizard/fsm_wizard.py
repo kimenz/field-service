@@ -8,6 +8,7 @@ class FSMWizard(models.TransientModel):
 
     def _prepare_fsm_location(self, partner):
         res = super()._prepare_fsm_location(partner)
+        partner = partner.parent_id or partner
         res["customer_id"] = partner.id
         res["owner_id"] = partner.id
         return res

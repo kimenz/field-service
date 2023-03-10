@@ -13,7 +13,10 @@
     "author": "Odoo Community Association (OCA), Rafnix Guzman",
     "depends": ["fieldservice_equipment_website"],
     "data": [
+        "security/ir.model.access.csv",
         "views/res_company_views.xml",
+        "views/fsm_equipment_views.xml",
+        "views/fsm_calibration_certificate_views.xml",
         "reports/fieldservice_equipment_report.xml",
         "reports/fieldservice_equipment_report_template.xml",
     ],

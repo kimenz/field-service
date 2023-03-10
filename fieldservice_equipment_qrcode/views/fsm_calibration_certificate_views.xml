@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id='fsm_calibration_certificate_view_tree' model='ir.ui.view'>
+        <field name="name">fsm.calibration.certificate.tree</field>
+        <field name="model">fsm.calibration.certificate</field>
+        <field name="arch" type="xml">
+            <tree string="Calibration Certificate">
+                <field name="name" />
+                <field name="initial_date" />
+                <field name="expiration_date" />
+                <field name="fsm_equipment_id" />
+            </tree>
+        </field>
+    </record>
+
+    <record id='fsm_calibration_certificate_view_form' model='ir.ui.view'>
+        <field name="name">fsm.calibration.certificate.form</field>
+        <field name="model">fsm.calibration.certificate</field>
+        <field name="arch" type="xml">
+            <form string="Calibration Certificate">
+                <sheet>
+                    <group>
+                        <label for="name" class="oe_edit_only" />
+                        <h1>
+                            <field name="name" />
+                        </h1>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="initial_date" />        
+                            <field name="expiration_date" />        
+                        </group>
+                        <group>
+                            
+                            <field name="fsm_equipment_id" />
+                            <field name="certificate_file" />
+                        </group>
+                        <label for="notes" class="oe_edit_only" />
+                        <field name="notes" />
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" />
+                    <field name="activity_ids" widget="mail_activity" />
+                    <field
+                        name="message_ids"
+                        widget="mail_thread"
+                        options="{'post_refresh': 'recipients'}"
+                    />
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id='fsm_calibration_certificate_action' model='ir.actions.act_window'>
+        <field name="name">Calibration Certificate</field>
+        <field name="res_model">fsm.calibration.certificate</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+          <p class="o_view_nocontent_smiling_face">
+            Create new Calibration Certificate.
+          </p>
+        </field>
+    </record>
+
+    <menuitem
+        action="fsm_calibration_certificate_action"
+        parent="fieldservice.data"
+        id="fsm_calibration_certificate_menu"
+        sequence="2"
+    />
+</odoo>

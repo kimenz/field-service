@@ -12,7 +12,8 @@
                         <group id="agreement-left">
                             <field
                                 name="agreement_id"
-                                domain="[('fsm_location_id', '=', location_id)]"
+                                domain="[('partner_id', '=', owned_by_id)]"
+                                required="True"
                             />
                             <field
                                 name="serviceprofile_id"

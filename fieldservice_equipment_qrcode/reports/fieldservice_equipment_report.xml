@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-    <record id="paperformat_fieldservice_calibration_certificate" model="report.paperformat">
+    <record
+        id="paperformat_fieldservice_calibration_certificate"
+        model="report.paperformat"
+    >
         <field name="name">Fieldservice Calibration Certificate format</field>
         <field name="default" eval="True" />
         <field name="format">custom</field>
@@ -19,8 +22,12 @@
         <field name="name">Calibration Certificate (PDF)</field>
         <field name="model">fsm.equipment</field>
         <field name="report_type">qweb-pdf</field>
-        <field name="report_name">fieldservice_equipment_qrcode.report_calibration_certificate</field>
-        <field name="report_file">fieldservice_equipment_qrcode.report_calibration_certificate</field>
+        <field
+            name="report_name"
+        >fieldservice_equipment_qrcode.report_calibration_certificate</field>
+        <field
+            name="report_file"
+        >fieldservice_equipment_qrcode.report_calibration_certificate</field>
         <field
             name="paperformat_id"
             ref="fieldservice_equipment_qrcode.paperformat_fieldservice_calibration_certificate"

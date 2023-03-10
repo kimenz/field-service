@@ -28,11 +28,11 @@
                     </group>
                     <group>
                         <group>
-                            <field name="initial_date" />        
-                            <field name="expiration_date" />        
+                            <field name="initial_date" />
+                            <field name="expiration_date" />
                         </group>
                         <group>
-                            
+
                             <field name="fsm_equipment_id" />
                             <field name="certificate_file" />
                         </group>

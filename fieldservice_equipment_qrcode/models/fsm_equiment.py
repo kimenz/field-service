@@ -20,7 +20,7 @@ class FsmEquimentQr(models.Model):
     fsm_calibration_certificate_ids = fields.One2many(
         "fsm.calibration.certificate",
         "fsm_equipment_id",
-        string="Calibration Certificates"
+        string="Calibration Certificates",
     )
 
     @api.depends("lot_id", "product_id")

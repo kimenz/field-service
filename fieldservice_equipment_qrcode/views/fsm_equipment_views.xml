@@ -9,7 +9,7 @@
             <page string="Calibration Certificate">
                 <field name="fsm_calibration_certificate_ids">
                     <tree>
-                        <field name="name"/>
+                        <field name="name" />
                         <field name="initial_date" />
                         <field name="expiration_date" />
                         <field name="fsm_equipment_id" />

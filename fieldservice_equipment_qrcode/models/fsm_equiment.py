@@ -17,6 +17,11 @@ class FsmEquimentQr(models.Model):
         readonly=True,
         compute="_compute_qrcode",
     )
+    fsm_calibration_certificate_ids = fields.One2many(
+        "fsm.calibration.certificate",
+        "fsm_equipment_id",
+        string="Calibration Certificates",
+    )
 
     @api.depends("lot_id", "product_id")
     def _compute_qrcode(self):
@@ -28,5 +33,5 @@ class FsmEquimentQr(models.Model):
         data = io.BytesIO()
         import qrcode
 
-        qrcode.make(url, box_size=4).save(data, optimise=True, format="PNG")
+        qrcode.make(url, box_size=8, border=0).save(data, optimise=True, format="PNG")
         return base64.b64encode(data.getvalue()).decode()

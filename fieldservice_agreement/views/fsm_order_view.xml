@@ -7,9 +7,11 @@
         <field name="inherit_id" ref="fieldservice.fsm_order_form" />
         <field name="arch" type="xml">
             <field name="location_id" position="after">
+                <field name="partner_location_id" invisible="True" />
                 <field
                     name="agreement_id"
-                    domain="[('fsm_location_id', '=', location_id), ('is_template', '=', False)]"
+                    domain="[('partner_id','=',partner_location_id),('is_template', '=', False)]"
+                    required="True"
                 />
                 <field
                     name="serviceprofile_id"

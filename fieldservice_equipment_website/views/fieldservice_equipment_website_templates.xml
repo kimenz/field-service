@@ -85,7 +85,7 @@
                                             t-as="certificate"
                                         >
                                     <a
-                                    t-att-href="'/equipment/calibration_certificate?certificate_id=' + str(certificate.id)"
+                                                t-att-href="'/equipment/calibration_certificate?certificate_id=' + str(certificate.id)"
                                                 class="list-group-item list-group-item-action"
                                             ><span
                                                     class="fa fa-download"

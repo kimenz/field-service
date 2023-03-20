@@ -14,5 +14,7 @@ class FsmCalibrationCertificate(models.Model):
     fsm_equipment_id = fields.Many2one(
         "fsm.equipment", string="Equipment", tracking=True
     )
-    certificate_file = fields.Binary(string="Certificate File", tracking=True, attachment=True)
+    certificate_file = fields.Binary(
+        string="Certificate File", tracking=True, attachment=True
+    )
     active = fields.Boolean(string="Active", default=True, tracking=True)

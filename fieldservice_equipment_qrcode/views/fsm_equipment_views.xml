@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-    <record id="fsm_equipment_calibration_certificate_form_view_inherit" model="ir.ui.view">
+    <record
+        id="fsm_equipment_calibration_certificate_form_view_inherit"
+        model="ir.ui.view"
+    >
         <field name="name">fsm.calibration.certificate.inherit</field>
         <field name="model">fsm.equipment</field>
         <field name="inherit_id" ref="fieldservice.fsm_equipment_form_view" />

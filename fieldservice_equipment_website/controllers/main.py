@@ -1,11 +1,12 @@
-import logging
 import base64
+import logging
 import mimetypes
 
 # import odoo.http as http
 from odoo import _, http
 from odoo.exceptions import AccessError, MissingError
-from odoo.http import request, content_disposition
+from odoo.http import content_disposition, request
+
 from odoo.addons.portal.controllers.portal import CustomerPortal, pager as portal_pager
 
 _logger = logging.getLogger(__name__)
@@ -27,17 +28,17 @@ class FieldserviceEquipmentWebsiteController(http.Controller):
             else http.request.render("website.page_404")
         )
 
-    @http.route('/equipment/calibration_certificate', type='http', auth='user')
+    @http.route("/equipment/calibration_certificate", type="http", auth="user")
     def download_file(self, **kwargs):
-        certificate_id = int(kwargs.get('certificate_id'))
-        certificate = request.env['fsm.calibration.certificate'].browse(certificate_id)
+        certificate_id = int(kwargs.get("certificate_id"))
+        certificate = request.env["fsm.calibration.certificate"].browse(certificate_id)
         filename = certificate.name
         filecontent = base64.b64decode(certificate.certificate_file)
-        ir_attachment = request.env['ir.attachment'].search(
+        ir_attachment = request.env["ir.attachment"].search(
             [
-                ("res_model", '=',"fsm.calibration.certificate"),
-                ('res_field', '=', 'certificate_file'),
-                ('res_id', 'in', [certificate.id])
+                ("res_model", "=", "fsm.calibration.certificate"),
+                ("res_field", "=", "certificate_file"),
+                ("res_id", "in", [certificate.id]),
             ]
         )
         extension = mimetypes.guess_extension(ir_attachment.mimetype)
@@ -47,12 +48,16 @@ class FieldserviceEquipmentWebsiteController(http.Controller):
             return request.make_response(
                 filecontent,
                 [
-                    ('Content-Type', ir_attachment.mimetype or 'application/octet-stream'), 
-                    ('Content-Disposition', content_disposition(filename)),
-                ]
+                    (
+                        "Content-Type",
+                        ir_attachment.mimetype or "application/octet-stream",
+                    ),
+                    ("Content-Disposition", content_disposition(filename)),
+                ],
             )
         else:
             return request.not_found()
+
 
 class PortalFieldservice(CustomerPortal):
     def _get_request_partner(self):

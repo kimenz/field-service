@@ -1,9 +1,11 @@
+import base64
 import logging
+import mimetypes
 
 # import odoo.http as http
 from odoo import _, http
 from odoo.exceptions import AccessError, MissingError
-from odoo.http import request
+from odoo.http import content_disposition, request
 
 from odoo.addons.portal.controllers.portal import CustomerPortal, pager as portal_pager
 
@@ -25,6 +27,36 @@ class FieldserviceEquipmentWebsiteController(http.Controller):
             if lot_obj
             else http.request.render("website.page_404")
         )
+
+    @http.route("/equipment/calibration_certificate", type="http", auth="user")
+    def download_file(self, **kwargs):
+        certificate_id = int(kwargs.get("certificate_id"))
+        certificate = request.env["fsm.calibration.certificate"].browse(certificate_id)
+        filename = certificate.name
+        filecontent = base64.b64decode(certificate.certificate_file)
+        ir_attachment = request.env["ir.attachment"].search(
+            [
+                ("res_model", "=", "fsm.calibration.certificate"),
+                ("res_field", "=", "certificate_file"),
+                ("res_id", "in", [certificate.id]),
+            ]
+        )
+        extension = mimetypes.guess_extension(ir_attachment.mimetype)
+        filename = f"{filename}{extension}"
+
+        if certificate and certificate.certificate_file:
+            return request.make_response(
+                filecontent,
+                [
+                    (
+                        "Content-Type",
+                        ir_attachment.mimetype or "application/octet-stream",
+                    ),
+                    ("Content-Disposition", content_disposition(filename)),
+                ],
+            )
+        else:
+            return request.not_found()
 
 
 class PortalFieldservice(CustomerPortal):

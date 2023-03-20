@@ -79,6 +79,22 @@
                                         /><br />
                                 </p>
                                 <div class="list-group list-group-flush mb-4">
+                                <p><b>HISTORICO DE CERTIFICADOS DE CALIBRACION:</b></p>
+                                <t
+                                            t-foreach="lot_obj.fsm_equipment_id.fsm_calibration_certificate_ids"
+                                            t-as="certificate"
+                                        >
+                                    <a
+                                                t-att-href="'/equipment/calibration_certificate?certificate_id=' + str(certificate.id)"
+                                                class="list-group-item list-group-item-action"
+                                            ><span
+                                                    class="fa fa-download"
+                                                /> Descargar: <t
+                                                    t-esc="certificate.name"
+                                                /></a>
+                                </t>
+                                </div>
+                                <div class="list-group list-group-flush mb-4">
                                 <p><b>HISTORICO DE CERTIFICADOS:</b></p>
                                 <t
                                             t-foreach="lot_obj.product_id.ce_certificate_medical_class_ids"

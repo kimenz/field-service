@@ -81,7 +81,7 @@ class PortalFieldservice(CustomerPortal):
                 "fsm.location",
                 values,
                 "location_count",
-                [["owner_id", "=", partner_id.id]],
+                [["fsm_parent_id", "=", partner_id.id]],
             )
         return values
 
@@ -237,7 +237,7 @@ class PortalFieldservice(CustomerPortal):
         ):
             return request.redirect("/my")
         partner_id = self._get_request_partner()
-        domain = [["owner_id", "=", partner_id.id]]
+        domain = [["fsm_parent_id", "=", partner_id.id]]
         searchbar_sortings = {
             "name": {"label": _("Name"), "order": "name desc"},
             "equipment_count": {

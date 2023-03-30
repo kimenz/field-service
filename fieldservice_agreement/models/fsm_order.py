@@ -16,7 +16,7 @@ class FSMOrder(models.Model):
     @api.depends("location_id.partner_id", "location_id.partner_id.parent_id")
     def _compute_partner_location_id(self):
         for order in self:
-            if order.location_id.partner_id.parent_id:
-                order.partner_location_id = order.location_id.partner_id.parent_id
+            if order.location_id.owner_id.parent_id:
+                order.partner_location_id = order.location_id.owner_id.parent_id
             else:
-                order.partner_location_id = order.location_id.partner_id
+                order.partner_location_id = order.location_id.owner_id

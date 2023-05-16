@@ -10,7 +10,7 @@
                 <field name="partner_location_id" invisible="True" />
                 <field
                     name="agreement_id"
-                    domain="[('partner_id','=',partner_location_id),('is_template', '=', False)]"
+                    domain="[('partner_id', 'in', [partner_location_id]),('is_template', '=', False)]"
                     required="True"
                 />
                 <field

@@ -21,9 +21,12 @@ class FSMFleetWizard(models.TransientModel):
         return {"type": "ir.actions.act_window_close"}
 
     def _prepare_fsm_vehicle(self, vehicle):
+        # buscar con xml_id
+        location = self.env.ref("fieldservice_vehicle_stock.stock_location_vehicle_storage")
         return {
             "fleet_vehicle_id": vehicle.id,
             "name": vehicle.name,
+            "inventory_location_id": location.id,
         }
 
     def action_convert_vehicle(self, vehicle):

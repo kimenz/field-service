@@ -9,6 +9,10 @@ class FSMEquipment(models.Model):
 
     url = fields.Char(store=True, readonly=True, compute="_compute_url")
 
+    repair_order_ids = fields.One2many(
+        "repair.order", "equipment_id", string="Repair Orders"
+    )
+
     def _compute_access_url(self):
         for record in self:
             record.access_url = f"/my/equipments/{record.id}"

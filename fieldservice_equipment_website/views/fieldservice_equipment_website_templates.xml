@@ -13,7 +13,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12">
-                            <h2><t t-esc="lot_obj.fsm_equipment_id.name" /><br /></h2>
+                            <h2><t t-esc="lot_obj.fsm_equipment_id.name" /></h2>
                             <h4>NUMERO DE RASTREAMENTO: <t t-esc="lot_obj.name" /></h4>
                         </div>
                         <div class="col-lg-8 pt16 pb16 o_colored_level">
@@ -73,45 +73,7 @@
                             </div>
                         </div>
                         <div class="col-lg-4 pt16 pb16 o_colored_level">
-                            <t t-if="lot_obj.product_id.is_medical">
-                                <p><b>CERTIFICATE VALIDITY DATE:</b> <t
-                                            t-esc="lot_obj.product_id.ce_certificate_validity_date"
-                                        /><br />
-                                </p>
-                                <div class="list-group list-group-flush mb-4">
-                                <p><b>HISTORICO DE CERTIFICADOS DE CALIBRACION:</b></p>
-                                <t
-                                            t-foreach="lot_obj.fsm_equipment_id.fsm_calibration_certificate_ids"
-                                            t-as="certificate"
-                                        >
-                                    <a
-                                                t-att-href="'/equipment/calibration_certificate?certificate_id=' + str(certificate.id)"
-                                                class="list-group-item list-group-item-action"
-                                            ><span
-                                                    class="fa fa-download"
-                                                /> Descargar: <t
-                                                    t-esc="certificate.name"
-                                                /></a>
-                                </t>
-                                </div>
-                                <div class="list-group list-group-flush mb-4">
-                                <p><b>HISTORICO DE CERTIFICADOS:</b></p>
-                                <t
-                                            t-foreach="lot_obj.product_id.ce_certificate_medical_class_ids"
-                                            t-as="attachment"
-                                        >
-                                    <a
-                                                t-attf-href="/web/content/#{attachment.id}?download=true&amp;access_token=#{attachment.access_token}"
-                                                class="list-group-item list-group-item-action"
-                                            ><span
-                                                    class="fa fa-download"
-                                                /> Descargar: <t
-                                                    t-esc="attachment.name"
-                                                /></a>
-                                </t>
-                                </div>
-                            </t>
-                            <p>
+                            <p class="text-center">
                                 <a
                                         href="/my/tickets"
                                         class="mb-2 btn btn-secondary"
@@ -125,43 +87,194 @@
                                     class="img img-fluid mx-auto"
                                     alt="image"
                                     loading="lazy"
-                                />
+                            />
+                            <p t-if="lot_obj.product_id.ce_certificate_validity_date"><b>CERTIFICATE VALIDITY DATE:</b> <t
+                                t-esc="lot_obj.product_id.ce_certificate_validity_date"
+                            /><br />
+                            </p>
+                            
                         </div>
                         <div class="col-md-12">
-                            <t t-if="lot_obj.fsm_equipment_id.helpdesk_ticket_ids">
-                                <h4>Ticket History</h4>
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">#</th>
-                                            <th scope="col">Title</th>
-                                            <th scope="col">Category</th>
-                                            <th scope="col">Created on</th>
-                                            <th scope="col">Last Stage Update</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                    <t
-                                                t-foreach="lot_obj.fsm_equipment_id.helpdesk_ticket_ids"
-                                                t-as="ticket"
-                                            >
-                                        <tr>
-                                            <th scope="row"><t
-                                                            t-esc="ticket.number"
-                                                        /></th>
-                                            <td><t t-esc="ticket.name" /></td>
-                                            <td><t
-                                                            t-esc="ticket.category_id.name"
-                                                        /></td>
-                                            <td><t t-esc="ticket.create_date" /></td>
-                                            <td><t
-                                                            t-esc="ticket.last_stage_update"
-                                                        /></td>
-                                        </tr>
+                        <!-- TABS -->
+                            <nav>
+                                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                    <a class="nav-item nav-link active" id="nav-ticket-history-tab" data-toggle="tab" href="#nav-ticket-history" role="tab" aria-controls="nav-ticket-history" aria-selected="true">Ticket History</a>
+                                    <a class="nav-item nav-link" id="nav-maintenance-history-tab" data-toggle="tab" href="#nav-maintenance-history" role="tab" aria-controls="nav-maintenance-history" aria-selected="false">Maintenance History</a>
+                                    <a class="nav-item nav-link" id="nav-repair-history-tab" data-toggle="tab" href="#nav-repair-history" role="tab" aria-controls="nav-repair-history" aria-selected="false">Repair History</a>
+                                    <a class="nav-item nav-link" id="nav-anvisa-history-tab" data-toggle="tab" href="#nav-anvisa-history" role="tab" aria-controls="nav-anvisa-history" aria-selected="false">ANVISA Documents</a>
+                                    <a class="nav-item nav-link" id="nav-calibration-certificate-history-tab" data-toggle="tab" href="#nav-calibration-certificate-history" role="tab" aria-controls="nav-calibration-certificate-history" aria-selected="false">Calibration Certificate History</a>
+                                </div>
+                            </nav>
+                            <div class="tab-content" id="nav-tabContent">
+                                <!-- Ticket history -->
+                                <div class="tab-pane fade show active" id="nav-ticket-history" role="tabpanel" aria-labelledby="nav-ticket-history-tab">
+                                    <t t-if="lot_obj.fsm_equipment_id.helpdesk_ticket_ids">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">#</th>
+                                                    <th scope="col">Title</th>
+                                                    <th scope="col">Category</th>
+                                                    <th scope="col">Created on</th>
+                                                    <th scope="col">Last Stage Update</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            <t
+                                                        t-foreach="lot_obj.fsm_equipment_id.helpdesk_ticket_ids"
+                                                        t-as="ticket"
+                                                    >
+                                                <tr>
+                                                    <th scope="row"><t
+                                                                    t-esc="ticket.number"
+                                                                /></th>
+                                                    <td><a t-attf-href="/my/ticket/#{ticket.id}" > <t t-esc="ticket.name" /></a> </td>
+                                                    <td><t
+                                                                    t-esc="ticket.category_id.name"
+                                                                /></td>
+                                                    <td><t t-esc="ticket.create_date" /></td>
+                                                    <td><t
+                                                                    t-esc="ticket.last_stage_update"
+                                                                /></td>
+                                                </tr>
+                                            </t>
+                                            </tbody>
+                                        </table>
                                     </t>
-                                    </tbody>
-                                </table>
-                            </t>
+
+                                    <t t-else="">
+                                        <br/>
+                                        <br/>
+                                        <h4 class="text-center">No tickets found.</h4>
+                                    </t>
+                                </div>
+                                <!-- Maintenance history -->
+                                <div class="tab-pane fade" id="nav-maintenance-history" role="tabpanel" aria-labelledby="nav-maintenance-history-tab">
+                                    <t t-if="lot_obj.fsm_equipment_id.maintenance_ids">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">#</th>
+                                                    <th scope="col">Order</th>
+                                                    <th scope="col">Type</th>
+                                                    <th scope="col">Scheduled Date</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            <t
+                                                t-foreach="lot_obj.fsm_equipment_id.maintenance_ids"
+                                                t-as="maintenance"
+                                            >
+                                                <tr>
+                                                    <th scope="row"><t
+                                                        t-esc="maintenance.id"
+                                                    /></th>
+                                                    <td><t t-esc="maintenance.name" /></td>
+                                                    <td><t
+                                                        t-esc="maintenance.maintenance_type"
+                                                    /></td>
+                                                    <td><t t-esc="maintenance.schedule_date" /></td>
+                                                    
+                                                </tr>
+                                            </t>
+                                            </tbody>
+                                        </table>
+                                    </t>
+
+                                    <t t-else="">
+                                        <br/>
+                                        <br/>
+                                        <h4 class="text-center">No maintenance found.</h4>
+                                    </t>
+                                </div>
+                                <!-- Repair history -->
+                                <div class="tab-pane fade" id="nav-repair-history" role="tabpanel" aria-labelledby="nav-repair-history-tab">
+                                    <t t-if="lot_obj.fsm_equipment_id.repair_order_ids">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">#</th>
+                                                    <th scope="col">Order</th>
+                                                    <th scope="col">State</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            <t
+                                                t-foreach="lot_obj.fsm_equipment_id.repair_order_ids"
+                                                t-as="repair"
+                                            >
+                                                <tr>
+                                                    <th scope="row"><t
+                                                        t-esc="repair.id"
+                                                    /></th>
+                                                    <td><t t-esc="repair.name" /></td>
+                                                    <td><t t-esc="repair.state" /></td>
+                                                    
+                                                </tr>
+                                            </t>
+                                            </tbody>
+                                        </table>
+                                    </t>
+
+                                    <t t-else="">
+                                        <br/>
+                                        <br/>
+                                        <h4 class="text-center">No repair found.</h4>
+                                    </t>
+                                </div>
+                                <!-- ANVISA Documents -->
+                                <div class="tab-pane fade" id="nav-anvisa-history" role="tabpanel" aria-labelledby="nav-anvisa-history-tab">
+
+                                    <t t-if="lot_obj.product_id.ce_certificate_medical_class_ids">
+                                        <div class="list-group list-group-flush mb-4">
+                                            <t
+                                                        t-foreach="lot_obj.product_id.ce_certificate_medical_class_ids"
+                                                        t-as="attachment"
+                                                    >
+                                                <a
+                                                            t-attf-href="/web/content/#{attachment.id}?download=true&amp;access_token=#{attachment.access_token}"
+                                                            class="list-group-item list-group-item-action"
+                                                        ><span
+                                                                class="fa fa-download"
+                                                            /> Descargar: <t
+                                                                t-esc="attachment.name"
+                                                            /></a>
+                                            </t>
+                                        </div>
+                                    </t>
+                                    <t t-else="">
+                                        <br/>
+                                        <br/>
+                                        <h4 class="text-center">No ANVISA documents found.</h4>
+                                    </t>
+                                </div>
+                                <!-- Calibration Certificate -->
+                                <div class="tab-pane fade" id="nav-calibration-certificate-history" role="tabpanel" aria-labelledby="nav-calibration-certificate-history-tab">
+
+                                    <t t-if="lot_obj.fsm_equipment_id.fsm_calibration_certificate_ids">
+                                        <div class="list-group list-group-flush mb-4">
+                                            <t
+                                                t-foreach="lot_obj.fsm_equipment_id.fsm_calibration_certificate_ids"
+                                                t-as="certificate"
+                                            >
+                                                <a
+                                                    t-att-href="'/equipment/calibration_certificate?certificate_id=' + str(certificate.id)"
+                                                    class="list-group-item list-group-item-action"
+                                                ><span
+                                                    class="fa fa-download"
+                                                /> Descargar: <t
+                                                    t-esc="certificate.name"
+                                                /></a>
+                                            </t>
+                                        </div>
+                                    </t>
+                                    <t t-else="">
+                                        <br/>
+                                        <br/>
+                                        <h4 class="text-center">No calibration certificate found.</h4>
+                                    </t>
+                                </div>
+                            </div>     
                         </div>
                     </div>
                 </div>

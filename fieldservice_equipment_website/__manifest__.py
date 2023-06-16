@@ -8,7 +8,7 @@
     "website": "https://github.com/OCA/field-service",
     "category": "Field Service",
     "author": "Odoo Community Association (OCA), Rafnixg",
-    "depends": ["fieldservice","fieldservice_equipment_stock", "repair"],
+    "depends": ["fieldservice", "fieldservice_equipment_stock", "repair"],
     "data": [
         "security/ir.model.access.csv",
         "security/fsm_equipment_security.xml",

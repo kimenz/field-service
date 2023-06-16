@@ -19,4 +19,3 @@ class RepairOrder(models.Model):
             )
         else:
             self.equipment_id = False
-    

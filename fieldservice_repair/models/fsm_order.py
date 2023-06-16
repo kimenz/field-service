@@ -33,6 +33,8 @@ class FSMOrder(models.Model):
                         "partner_id": order.location_id.partner_id
                         and order.location_id.partner_id.id
                         or False,
+                        "fsm_order_id": order.id,
+                        "equipment_id": equipment.id,
                     }
                 )
                 order.repair_id = repair_id

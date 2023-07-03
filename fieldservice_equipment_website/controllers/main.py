@@ -88,7 +88,7 @@ class PortalFieldservice(CustomerPortal):
     def _set_count_to_values(self, model_name, values, key, domain=None):
         if domain is None:
             domain = []
-        obj_model = request.env[model_name]
+        obj_model = request.env[model_name].sudo()
         count = (
             obj_model.search_count(domain)
             if obj_model.check_access_rights("read", raise_exception=False)

@@ -10,7 +10,11 @@
                 } -->
                     .page p{
                         margin-bottom:0;
-                        font-size:2mm;
+                        margin-top:1mm;
+                        font-size:1.8mm;
+                    }
+                    .page p:last-child{
+                        font-size:1.7mm;
                     }
                     .col-left{
                         width: 50%;

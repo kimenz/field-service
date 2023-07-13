@@ -39,11 +39,11 @@
                 <t t-foreach="docs" t-as="o">
                     <div class="page">
                         <div class="col-left">
-                            <h1>CERTIFICADO CALIBRAÇÃO</h1>
+                            <h1>ENGENHARIA CLÍNICA</h1>
+                            <!-- <h1>CERTIFICADO CALIBRAÇÃO</h1> -->
                             <p><b>RESPONSAVEL: ______________________</b></p>
-                            <p><b>DATA: _____/_____</b></p>
-                            <p><b>APROX: _____/_____</b></p>
                             <p><b>NUMERO DE SERIE:</b> <t t-esc="o.lot_id.name" /></p>
+                            <p><b><t t-esc="o.name.split(' - ')[0]" /></b></p>
                         </div>
                         <div class="col-right">
                             <img

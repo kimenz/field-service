@@ -62,7 +62,7 @@ class FieldserviceEquipmentWebsiteController(http.Controller):
 class PortalFieldservice(CustomerPortal):
     def _get_request_partner(self):
         partner_id = request.env.user.partner_id
-        if partner_id.parent_id:
+        while partner_id.parent_id:
             partner_id = partner_id.parent_id
         return partner_id
 

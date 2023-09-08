@@ -18,23 +18,34 @@ class FSMOrder(models.Model):
         if order.type.internal_type == "repair":
             if order.equipment_id and order.equipment_id.current_stock_location_id:
                 equipment = order.equipment_id
+                partner_id = (
+                    order.location_id.partner_id
+                    and order.location_id.partner_id.id
+                    or order.customer_id.id
+                )
+                location_id = (
+                    equipment.current_stock_location_id
+                    and equipment.current_stock_location_id.id
+                    or False
+                )
+
                 repair_id = self.env["repair.order"].create(
                     {
                         "name": order.name or "",
                         "product_id": equipment.product_id.id or False,
                         "product_uom": equipment.product_id.uom_id.id or False,
-                        "location_id": equipment.current_stock_location_id
-                        and equipment.current_stock_location_id.id
-                        or False,
+                        "location_id": location_id,
                         "lot_id": equipment.lot_id.id or "",
                         "product_qty": 1,
                         "invoice_method": "none",
                         "internal_notes": order.description,
-                        "partner_id": order.location_id.partner_id
-                        and order.location_id.partner_id.id
-                        or False,
+                        "partner_id": partner_id,
+                        "address_id": partner_id,
                         "fsm_order_id": order.id,
                         "equipment_id": equipment.id,
+                        "helpdesk_team_id": order.team_id.helpdesk_team_id.id or False,
+                        "serviceprofile_id": order.serviceprofile_id.id or False,
+                        "agreement_id": order.agreement_id.id or False,
                     }
                 )
                 order.repair_id = repair_id

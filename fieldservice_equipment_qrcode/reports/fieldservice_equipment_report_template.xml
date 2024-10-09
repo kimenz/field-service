@@ -63,4 +63,199 @@
                 </t>
             </t>
     </template>
+    <template id="report_seg_electrica">
+        <t t-call="web.html_container">
+            <style>
+            <!-- .page{
+                width:60mm;
+                height:40mm;
+                border: 1px solid red;
+            } -->
+                .page p{
+                    margin-bottom:0;
+                    margin-top:1mm;
+                    font-size:2.4mm;
+                }
+                .col-left{
+                    width: 50%;
+                    float: left;
+                }
+                .col-right{
+                    width: 50%;
+                    float:right;
+                    text-align:center;
+                }
+                .logo-company{
+                    height:13mm;
+                    margin-bottom: 1mm;
+                }
+                .qrcode{
+                    height: 22mm;
+                    margin-top: 1mm;
+                    margin-bottom: -2mm;
+                }
+                h1{
+                    font-size:3mm;
+                    font-weight: bold;
+                    margin-bottom:4mm;
+                }
+                .page p.fecha{
+                    margin-bottom:0;
+                    margin-top:1mm;
+                    font-size:2.2mm;
+                }
+            </style>
+            <t t-foreach="docs" t-as="o">
+                <div class="page">
+                    <div class="col-left">
+                        <h1>SEGURANCA ELECTRICA</h1>
+                        <!-- <h1>CERTIFICADO CALIBRAÇÃO</h1> -->
+                        <!-- <p><b>RESPONSAVEL: ______________________</b></p> -->
+                        <p><b>NUMERO DE SERIE:</b> <t t-esc="o.lot_id.name" /></p>
+                        <p><b><t t-esc="o.name.split(' - ')[0]" /></b></p>
+                        <p class='fecha'><b>DATA:________________</b></p>
+                        <p class='fecha'><b>PROX:________________</b></p>
+
+                    </div>
+                    <div class="col-right">
+                        <h3>KIMENZ</h3>
+                        <img t-att-src="image_data_uri(o.qrcode)" class="qrcode" />
+                    </div>
+                    <div
+                    style="display:block; clear:both; page-break-after:avoid;"
+                />
+                </div>
+            </t>
+        </t>
+    </template>
+    <template id="report_calibracao">
+        <t t-call="web.html_container">
+            <style>
+            <!-- .page{
+                width:60mm;
+                height:40mm;
+                border: 1px solid red;
+            } -->
+                .page p{
+                    margin-bottom:0;
+                    margin-top:1mm;
+                    font-size:2.4mm;
+                }
+                .col-left{
+                    width: 50%;
+                    float: left;
+                }
+                .col-right{
+                    width: 50%;
+                    float:right;
+                    text-align:center;
+                }
+                .logo-company{
+                    height:13mm;
+                    margin-bottom: 1mm;
+                }
+                .qrcode{
+                    height: 22mm;
+                    margin-top: 1mm;
+                    margin-bottom: -2mm;
+                }
+                h1{
+                    font-size:3mm;
+                    font-weight: bold;
+                    margin-bottom:4mm;
+                }
+                .page p.fecha{
+                    margin-bottom:0;
+                    margin-top:1mm;
+                    font-size:2.2mm;
+                }
+            </style>
+            <t t-foreach="docs" t-as="o">
+                <div class="page">
+                    <div class="col-left">
+                        <h1>CERTIFICADO CALIBRAÇÃO</h1>
+                        <!-- <h1>CERTIFICADO CALIBRAÇÃO</h1> -->
+                        <!-- <p><b>RESPONSAVEL: ______________________</b></p> -->
+                        <p><b>NUMERO DE SERIE:</b> <t t-esc="o.lot_id.name" /></p>
+                        <p><b><t t-esc="o.name.split(' - ')[0]" /></b></p>
+                        <p class='fecha'><b>DATA:________________</b></p>
+                        <p class='fecha'><b>PROX:________________</b></p>
+
+                    </div>
+                    <div class="col-right">
+                        <h3>KIMENZ</h3>
+                        <img t-att-src="image_data_uri(o.qrcode)" class="qrcode" />
+                    </div>
+                    <div
+                    style="display:block; clear:both; page-break-after:avoid;"
+                />
+                </div>
+            </t>
+        </t>
+    </template>
+    <template id="report_preventiva">
+        <t t-call="web.html_container">
+            <style>
+            <!-- .page{
+                width:60mm;
+                height:40mm;
+                border: 1px solid red;
+            } -->
+                .page p{
+                    margin-bottom:0;
+                    margin-top:1mm;
+                    font-size:2.4mm;
+                }
+                .col-left{
+                    width: 50%;
+                    float: left;
+                }
+                .col-right{
+                    width: 50%;
+                    float:right;
+                    text-align:center;
+                }
+                .logo-company{
+                    height:13mm;
+                    margin-bottom: 1mm;
+                }
+                .qrcode{
+                    height: 22mm;
+                    margin-top: 1mm;
+                    margin-bottom: -2mm;
+                }
+                h1{
+                    font-size:3mm;
+                    font-weight: bold;
+                    margin-bottom:4mm;
+                }
+                .page p.fecha{
+                    margin-bottom:0;
+                    margin-top:1mm;
+                    font-size:2.2mm;
+                }
+            </style>
+            <t t-foreach="docs" t-as="o">
+                <div class="page">
+                    <div class="col-left">
+                        <h1>VISITA PREVENTIVA</h1>
+                        <!-- <h1>CERTIFICADO CALIBRAÇÃO</h1> -->
+                        <!-- <p><b>RESPONSAVEL: ______________________</b></p> -->
+                        <p><b>NUMERO DE SERIE:</b> <t t-esc="o.lot_id.name" /></p>
+                        <p><b><t t-esc="o.name.split(' - ')[0]" /></b></p>
+                        <p class='fecha'><b>DATA:________________</b></p>
+                        <p class='fecha'><b>PROX:________________</b></p>
+
+                    </div>
+                    <div class="col-right">
+                        <h3>KIMENZ</h3>
+                        <img t-att-src="image_data_uri(o.qrcode)" class="qrcode" />
+                    </div>
+                    <div
+                    style="display:block; clear:both; page-break-after:avoid;"
+                />
+                </div>
+            </t>
+        </t>
+    </template>
 </odoo>

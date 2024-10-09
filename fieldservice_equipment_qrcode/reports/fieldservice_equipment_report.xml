@@ -38,4 +38,64 @@
         <field name="binding_model_id" ref="model_fsm_equipment" />
         <field name="binding_type">report</field>
     </record>
+    <record id="action_report_fieldservice_equipment_seg_electrica" model="ir.actions.report">
+        <field name="name">SEGURANÇA ELECTRICA (PDF)</field>
+        <field name="model">fsm.equipment</field>
+        <field name="report_type">qweb-pdf</field>
+        <field
+            name="report_name"
+        >fieldservice_equipment_qrcode.report_seg_electrica</field>
+        <field
+            name="report_file"
+        >fieldservice_equipment_qrcode.report_seg_electrica</field>
+        <field
+            name="paperformat_id"
+            ref="fieldservice_equipment_qrcode.paperformat_fieldservice_calibration_certificate"
+        />
+        <field
+            name="print_report_name"
+        >'SEGURANÇA ELECTRICA - %s' % (object.lot_id.name)</field>
+        <field name="binding_model_id" ref="model_fsm_equipment" />
+        <field name="binding_type">report</field>
+    </record>
+    <record id="action_report_fieldservice_equipment_calibracao" model="ir.actions.report">
+        <field name="name">CERTIFICADO CALIBRAÇÃO (PDF)</field>
+        <field name="model">fsm.equipment</field>
+        <field name="report_type">qweb-pdf</field>
+        <field
+            name="report_name"
+        >fieldservice_equipment_qrcode.report_calibracao</field>
+        <field
+            name="report_file"
+        >fieldservice_equipment_qrcode.report_calibracao</field>
+        <field
+            name="paperformat_id"
+            ref="fieldservice_equipment_qrcode.paperformat_fieldservice_calibration_certificate"
+        />
+        <field
+            name="print_report_name"
+        >'CERTIFICADO CALIBRAÇÃO - %s' % (object.lot_id.name)</field>
+        <field name="binding_model_id" ref="model_fsm_equipment" />
+        <field name="binding_type">report</field>
+    </record>
+    <record id="action_report_fieldservice_equipment_preventiva" model="ir.actions.report">
+        <field name="name">VISITA PREVENTIVA (PDF)</field>
+        <field name="model">fsm.equipment</field>
+        <field name="report_type">qweb-pdf</field>
+        <field
+            name="report_name"
+        >fieldservice_equipment_qrcode.report_preventiva</field>
+        <field
+            name="report_file"
+        >fieldservice_equipment_qrcode.report_preventiva</field>
+        <field
+            name="paperformat_id"
+            ref="fieldservice_equipment_qrcode.paperformat_fieldservice_calibration_certificate"
+        />
+        <field
+            name="print_report_name"
+        >'VISITA PREVENTIVA - %s' % (object.lot_id.name)</field>
+        <field name="binding_model_id" ref="model_fsm_equipment" />
+        <field name="binding_type">report</field>
+    </record>
 </odoo>
